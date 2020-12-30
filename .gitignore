@@ -12,3 +12,4 @@ node_modules/
 .sudo_as_admin_successful
 .viminfo
 .idea/
+package-lock.jsong
