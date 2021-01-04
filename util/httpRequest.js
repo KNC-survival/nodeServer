@@ -5,7 +5,7 @@ exports.httpGet = function (url, data) {
         {
             params: data,
         }).then(function (response) {
-        return response.data;
+        return response;
     })
         .catch(function (error) {
             return error;
