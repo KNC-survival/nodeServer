@@ -27,8 +27,13 @@ const app = express.Router();
 app.get('/photo', async (req, res) => {
     const body = await httpGet('https://www.instagram.com/cho_wonja/', {});
     const $ = cheerio.load(body.data);
-    console.log($('img'));
+    const $img = $('script');
 
+    $img.each(function(i, elem) {
+        console.log(elem);
+    });
+
+    // console.log(img);
     res.send();
 });
 
