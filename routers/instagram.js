@@ -1,5 +1,6 @@
 const express = require("express");
 const models = require("../models")
+const _ = require("lodash");
 const app = express.Router();
 
 module.exports = app;
@@ -22,7 +23,7 @@ app.post('/', async (req, res) => {
         return res.status(400).end();
     }
 
-    await models.Instagram.destroy()
+    await models.Instagram.destroy({where: {order: data.order}});
 
     await models.Instagram.create({
         photo: data.photo,
@@ -30,9 +31,21 @@ app.post('/', async (req, res) => {
         order: data.order,
     });
 
-    return res.send({'instagram': models.Instagram.findAll()});
+    return res.end();
 });
 
-app.get('/instagram', async (req, res) => {
+app.get('/', async (req, res) => {
+    const instagram = await models.Instagram.findAll();
+    const photoList = [];
+    const directionList = [];
 
+    _.each(instagram, data => {
+        photoList.push(data.photo);
+        directionList.push(data.direction);
+    })
+
+    res.send({
+        'photoList': photoList,
+        'directionList': directionList
+    });
 });
