@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Instagram.init({
+    order: DataTypes.INTEGER,
     photo: DataTypes.STRING,
     direction: DataTypes.STRING
   }, {
